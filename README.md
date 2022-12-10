@@ -5,6 +5,12 @@ This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with
 - automatically downloads the file
 - Add a new button that instantly goes to the download
 
+## Screenshots
+
+![image](https://user-images.githubusercontent.com/72335827/206877756-955754c1-9e1a-4c10-b8ab-1630125b999e.png)
+![image](https://user-images.githubusercontent.com/72335827/206877762-baa5e49c-a876-442e-9669-0f13563b924a.png)
+
+
 ## Todo
 
 somehow skip the waiting time
