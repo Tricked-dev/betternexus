@@ -1,5 +1,30 @@
 This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
 
+## Features
+
+- automatically downloads the file
+- Add a new button that instantly goes to the download
+
+## Todo
+
+somehow skip the waiting time
+
+```html
+<script>
+  function getSetTimeout() {
+    const frame = document.createElement("iframe")
+    document.body.appendChild(frame)
+    const newTimeout = frame.contentWindow.setTimeout.bind(self)
+    document.body.removeChild(frame)
+    return newTimeout
+  }
+  $(function () {
+    //overwrite this somehow
+    const oaheteobsumliekwaetrrtrmnteotatcd = getSetTimeout()
+  })
+</script>
+```
+
 ## Getting Started
 
 First, run the development server:
