@@ -8,9 +8,11 @@ const inject = async (tabId: number) => {
   if (!config) {
     config = {
       quickDownloadButton:
-        (await storage.get("quickDownloadButton")) != "false",
-      autoDownload: (await storage.get("autoDownload")) != "false",
-      superQuickDownload: (await storage.get("superQuickDownload")) != "false",
+        (await storage.get("QuickDownloadButton")) != "false",
+      autoDownload: (await storage.get("AutoDownload")) != "false",
+      superQuickDownload: (await storage.get("SuperQuickDownload")) != "false",
+      removePremiumBanners:
+        (await storage.get("RemovePremiumBanners")) != "false",
     };
   }
   chrome.scripting.executeScript(

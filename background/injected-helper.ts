@@ -4,7 +4,7 @@ const windowChanger = (config: Config) => {
   const addQuickDownload = () => {
     if (document.getElementById("better-nexus-active")) return;
     const manualParentBase = document.getElementById("action-manual");
-    const manualParent = manualParentBase.cloneNode(true) as HTMLElement;
+    const manualParent = manualParentBase?.cloneNode(true) as HTMLElement;
 
     const text =
       manualParent?.getElementsByClassName("btn inline-flex popup-btn-ajax")[0];
@@ -91,6 +91,19 @@ const windowChanger = (config: Config) => {
     ) {
       window.location.href = path;
     }
+  }
+  function removeAllPremiumBanners() {
+    let elemns = document.querySelectorAll("section .premium-block");
+    for (let elem of elemns) {
+      elem.classList.add("hidden");
+      elem.remove();
+    }
+  }
+  if (config.removePremiumBanners) {
+    setTimeout(() => {
+      removeAllPremiumBanners();
+    }, 200);
+    removeAllPremiumBanners();
   }
 };
 

@@ -107,8 +107,11 @@ function IndexPopup() {
     "QuickDownloadButton",
     true
   )
-
   const [autoDownload, setAutoDownload] = useStorage("AutoDownload", true)
+  const [removePremiumBanners, setRemovePremiumBanners] = useStorage(
+    "RemovePremiumBanners",
+    true
+  )
   const [superQuickDownload, setSuperQuickDownload] = useStorage(
     "SuperQuickDownload",
     false
@@ -118,9 +121,15 @@ function IndexPopup() {
     chrome.runtime.sendMessage({
       quickDownloadButton,
       autoDownload,
-      superQuickDownload
+      superQuickDownload,
+      removePremiumBanners
     })
-  }, [quickDownloadButton, autoDownload, superQuickDownload])
+  }, [
+    quickDownloadButton,
+    autoDownload,
+    superQuickDownload,
+    removePremiumBanners
+  ])
 
   return (
     <>
@@ -160,6 +169,18 @@ function IndexPopup() {
             isChecked={autoDownload}
             colorScheme="orange"
             onChange={(e) => setAutoDownload(e.target.checked)}
+          />
+        </FormControl>
+        <FormControl display="flex" alignItems="center">
+          <Tooltip label="Removes the premium banners from the mod page">
+            <FormLabel htmlFor="email-alerts" mb="0" mr="auto">
+              Remove Premium Banners
+            </FormLabel>
+          </Tooltip>
+          <Switch
+            isChecked={removePremiumBanners}
+            colorScheme="orange"
+            onChange={(e) => setRemovePremiumBanners(e.target.checked)}
           />
         </FormControl>
       </Box>
