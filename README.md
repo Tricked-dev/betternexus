@@ -10,6 +10,10 @@ This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with
 ![image](https://user-images.githubusercontent.com/72335827/206877756-955754c1-9e1a-4c10-b8ab-1630125b999e.png)
 ![image](https://user-images.githubusercontent.com/72335827/206877762-baa5e49c-a876-442e-9669-0f13563b924a.png)
 
+mass download accepts a bunch of urls and then opens those tabs and starts the download
+
+![image](https://user-images.githubusercontent.com/72335827/206899888-b81fbd0b-b3c7-4533-a0c4-0b5180722ca0.png)
+
 
 ## Todo
 
