@@ -1,64 +1,46 @@
 const windowChanger = (config: Config) => {
   // The download path @example https://www.nexusmods.com/subnautica/mods/12?tab=files&file_id=4226
   let path: string;
-  async function addQuickDownload() {
-    if (document.getElementById("better-nexus-active")) {
-      return;
-    }
-    let manualParentBase = document.getElementById("action-manual");
-    let manualParent = manualParentBase.cloneNode(true) as HTMLElement;
+  const addQuickDownload = () => {
+    if (document.getElementById("better-nexus-active")) return;
+    const manualParentBase = document.getElementById("action-manual");
+    const manualParent = manualParentBase.cloneNode(true) as HTMLElement;
 
-    // only do buttons with popup-btn-ajax other ones are more direct
-    let text = manualParent
-      ?.getElementsByClassName("btn inline-flex popup-btn-ajax")[0];
+    const text =
+      manualParent?.getElementsByClassName("btn inline-flex popup-btn-ajax")[0];
+    if (!text) return;
 
-    if (text) {
-      manualParentBase.parentNode.appendChild(manualParent);
-      manualParent.id = "better-nexus-active";
-      let search = new URL(`https://localhost${text.attributes["href"].value}`)
-        .searchParams;
+    manualParentBase.parentNode.appendChild(manualParent);
+    manualParent.id = "better-nexus-active";
 
-      let file = search.get("id") ?? search.get("file_id");
-      let downloadUrl = new URL(window.location.href);
+    const search =
+      new URL(`https://localhost${text.attributes["href"].value}`).searchParams;
+    const file = search.get("id") || search.get("file_id");
+    const downloadUrl = new URL(window.location.href);
 
-      downloadUrl.searchParams.set("file_id", file);
-      downloadUrl.searchParams.set("tab", "files");
-      downloadUrl.searchParams.delete("fast");
+    downloadUrl.searchParams.set("file_id", file);
+    downloadUrl.searchParams.set("tab", "files");
+    downloadUrl.searchParams.delete("fast");
 
-      text.setAttribute(
-        "href",
-        `${downloadUrl.href}`,
-      );
-      text.getElementsByClassName("flex-label")[0].innerHTML = "Quick Download";
-      text.classList.remove("popup-btn-ajax");
+    text.setAttribute("href", downloadUrl.href);
+    text.getElementsByClassName("flex-label")[0].innerHTML = "Quick Download";
+    text.classList.remove("popup-btn-ajax");
 
-      path = downloadUrl.href;
-    }
-    let instantDownload = manualParent
-      ?.getElementsByClassName("btn inline-flex")[0];
-    if (instantDownload) {
-      let loc = instantDownload.attributes["href"].value;
-      if (loc.includes("file_id=")) {
-        path = loc;
-      }
-    }
+    path = downloadUrl.href;
+  };
 
-    // automatically go to the download page
-  }
-
-  function addAutoDownload() {
-    let interval = setInterval(() => {
-      let dl = document.getElementById("slowDownloadButton");
+  const addAutoDownload = () => {
+    const interval = setInterval(() => {
+      const dl = document.getElementById("slowDownloadButton");
 
       if (dl) {
         clearInterval(interval);
-        setTimeout(() => {
-          dl.click();
-        }, 200);
+        setTimeout(() => dl.click(), 200);
       }
     }, 200);
-  }
-  async function AddInstantDownload() {
+  };
+
+  const addInstantDownload = async () => {
     let search = new URL(path).searchParams;
     let file = search.get("id") ?? search.get("file_id");
     let manualParentBase = document.getElementById("action-manual");
@@ -77,24 +59,22 @@ const windowChanger = (config: Config) => {
         "credentials": "include",
       },
     ).then((r) => r.json()).then((r) => r.url);
-    if (url) {
-      let manualParent = manualParentBase.cloneNode(true) as HTMLElement;
+    if (!url) return;
+    let manualParent = manualParentBase.cloneNode(true) as HTMLElement;
 
-      manualParent.children[0].attributes["href"].value = url;
-      let text = manualParent
-        ?.getElementsByClassName("btn inline-flex popup-btn-ajax")[0];
-      text.getElementsByClassName("flex-label")[0].innerHTML =
-        "Instant Download";
+    manualParent.children[0].attributes["href"].value = url;
+    let text = manualParent
+      ?.getElementsByClassName("btn inline-flex popup-btn-ajax")[0];
+    text.getElementsByClassName("flex-label")[0].innerHTML = "Instant Download";
 
-      manualParentBase.parentNode.appendChild(manualParent);
+    manualParentBase.parentNode.appendChild(manualParent);
 
-      if (
-        window.location.search.includes("fast=true")
-      ) {
-        window.location.href = url;
-      }
+    if (
+      window.location.search.includes("fast=true")
+    ) {
+      window.location.href = url;
     }
-  }
+  };
 
   if (config.quickDownloadButton) {
     addQuickDownload();
@@ -103,7 +83,7 @@ const windowChanger = (config: Config) => {
     addAutoDownload();
   }
   if (config.superQuickDownload) {
-    AddInstantDownload();
+    addInstantDownload();
   }
   if (path && !config.superQuickDownload) {
     if (
