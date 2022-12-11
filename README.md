@@ -18,7 +18,6 @@ mass download accepts a bunch of urls and then opens those tabs and starts the d
 
 ![image](https://user-images.githubusercontent.com/72335827/206899888-b81fbd0b-b3c7-4533-a0c4-0b5180722ca0.png)
 
-
 ## Todo
 
 somehow skip the waiting time
@@ -60,12 +59,10 @@ For further guidance, [visit our Documentation](https://docs.plasmo.com/)
 Run the following:
 
 ```bash
-pnpm build
-# or
-npm run build
+node build.js
 ```
 
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
+The extensions will be built in the `dist` directory.
 
 ## Submit to the webstores
 
