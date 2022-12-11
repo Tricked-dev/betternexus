@@ -9,7 +9,7 @@ This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with
 
 ## Screenshots
 
-![image](https://user-images.githubusercontent.com/72335827/206900255-ca6e57f1-ca4e-47e0-a60e-034e71e18b17.png)
+![image](https://user-images.githubusercontent.com/72335827/206926868-b6bb73b7-6d1a-4557-9b8e-0171804e36ea.png)
 ![image](https://user-images.githubusercontent.com/72335827/206900262-a221c851-a628-48d3-9438-47f5b21111fe.png)
 
 ![image](https://user-images.githubusercontent.com/72335827/206877762-baa5e49c-a876-442e-9669-0f13563b924a.png)
