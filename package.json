@@ -1,9 +1,9 @@
 {
   "name": "betternexus",
-  "displayName": "Betternexus",
-  "version": "0.0.0",
-  "description": "A basic Plasmo extension.",
-  "author": "tricked",
+  "displayName": "BetterNexus",
+  "version": "0.1.1",
+  "description": "Improve the Nexus mods website with a quick download button and automatic downloads.",
+  "author": "Tricked-dev <tricked@tricked.pro>",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
@@ -13,11 +13,13 @@
     "@chakra-ui/react": "^2.4.3",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@gatsbyjs/reach-router": "^2.0.0",
     "@plasmohq/storage": "^0.13.0",
     "framer-motion": "^7.6.19",
     "plasmo": "0.59.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "wouter": "^2.9.0"
   },
   "devDependencies": {
     "@plasmohq/prettier-plugin-sort-imports": "3.6.0",
@@ -34,9 +36,7 @@
     ],
     "permissions": [
       "scripting",
-      "tabs",
       "activeTab"
-    ],
-    "run_at": "document_start"
+    ]
   }
 }

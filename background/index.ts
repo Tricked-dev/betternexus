@@ -33,6 +33,7 @@ const inject = async (tabId: number) => {
 // Simple example showing how to inject.
 // You can inject however you'd like to, doesn't have
 // to be with chrome.tabs.onActivated
-chrome.tabs.onUpdated.addListener((e) => {
+chrome.tabs.onUpdated.addListener((e, changeInfo, tab) => {
+  if (!tab.url.includes("https://www.nexusmods.com/")) return;
   inject(e);
 });

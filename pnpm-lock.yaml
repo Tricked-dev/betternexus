@@ -4,6 +4,7 @@ specifiers:
   '@chakra-ui/react': ^2.4.3
   '@emotion/react': ^11.10.5
   '@emotion/styled': ^11.10.5
+  '@gatsbyjs/reach-router': ^2.0.0
   '@plasmohq/prettier-plugin-sort-imports': 3.6.0
   '@plasmohq/storage': ^0.13.0
   '@types/chrome': 0.0.203
@@ -16,16 +17,19 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   typescript: 4.9.4
+  wouter: ^2.9.0
 
 dependencies:
   '@chakra-ui/react': 2.4.3_366jsnbj2fqgpp64v3qddukxli
   '@emotion/react': 11.10.5_kzbn2opkn2327fwg5yzwzya5o4
   '@emotion/styled': 11.10.5_qvatmowesywn4ye42qoh247szu
+  '@gatsbyjs/reach-router': 2.0.0_biqbaboplfbrettd7655fr4n2y
   '@plasmohq/storage': 0.13.0_react@18.2.0
   framer-motion: 7.6.19_biqbaboplfbrettd7655fr4n2y
   plasmo: 0.59.3_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  wouter: 2.9.0_react@18.2.0
 
 devDependencies:
   '@plasmohq/prettier-plugin-sort-imports': 3.6.0_prettier@2.8.1
@@ -1480,6 +1484,18 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       cross-spawn: 7.0.3
+    dev: false
+
+  /@gatsbyjs/reach-router/2.0.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-n5nifEBtQCo4Wc/ErBvFEGyX5y8dKPSERre3pmuizkJl9J4l0M0bhu6aMc4uOXhG66UR4jgVDjN2Q2I2FSrVkw==}
+    peerDependencies:
+      react: 18.x
+      react-dom: 18.x
+    dependencies:
+      invariant: 2.2.4
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@jridgewell/gen-mapping/0.1.1:
@@ -6161,6 +6177,14 @@ packages:
     hasBin: true
     dependencies:
       isexe: 2.0.0
+    dev: false
+
+  /wouter/2.9.0_react@18.2.0:
+    resolution: {integrity: sha512-cGi9miU5jgwNaybj4sfzY9ZVhU8EwFsncmi2yDvVbS2pL/yz8ZpAMMiELHr4j8w2NLStgI/ltqDluYvBwPhYoQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /wrap-ansi/8.0.1:
