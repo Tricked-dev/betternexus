@@ -77,6 +77,31 @@ function Settings() {
   )
 }
 
+function Header() {
+  return (
+    <Box bg="gray.600" px="4" py="4">
+      <Heading fontSize={"3xl"}> Better Nexus</Heading>
+      <Text fontSize={"md"} colorScheme="blue">
+        Just slightly improve the Nexus experience
+      </Text>
+      <NavigationLinks />
+    </Box>
+  )
+}
+function NavigationLinks() {
+  return (
+    <Box as="nav" display="flex" gap="2">
+      <Link href="/settings">Settings</Link>
+      <Link href="https://www.nexusmods.com/" target="_blank">
+        Open nexus
+      </Link>
+      <Link href="/tabs/mass.html" target="_blank">
+        Open Mass Download
+      </Link>
+    </Box>
+  )
+}
+
 function IndexPopup() {
   const [quickDownloadButton, setQuickDownloadButton] = useStorage(
     "QuickDownloadButton",
@@ -84,31 +109,22 @@ function IndexPopup() {
   )
 
   const [autoDownload, setAutoDownload] = useStorage("AutoDownload", true)
+  const [superQuickDownload, setSuperQuickDownload] = useStorage(
+    "SuperQuickDownload",
+    false
+  )
 
   useEffect(() => {
     chrome.runtime.sendMessage({
       quickDownloadButton,
-      autoDownload
+      autoDownload,
+      superQuickDownload
     })
-  }, [quickDownloadButton, autoDownload])
+  }, [quickDownloadButton, autoDownload, superQuickDownload])
 
   return (
     <>
-      <Box bg="gray.600" px="4" py="4">
-        <Heading fontSize={"3xl"}> Better Nexus</Heading>
-        <Text fontSize={"md"} colorScheme="blue">
-          Just slightly improve the Nexus experience
-        </Text>
-        <Box as="nav" display="flex" gap="2">
-          <Link href="/settings">Settings</Link>
-          <Link href="https://www.nexusmods.com/" target="_blank">
-            Open nexus
-          </Link>
-          <Link href="/tabs/mass.html" target="_blank">
-            Open Mass Download
-          </Link>
-        </Box>
-      </Box>
+      <Header />
       <Box px="4" pb="4" pt="2">
         <FormControl display="flex" alignItems="center">
           <Tooltip label="Adds a button that skips the popup when a mod requires dependencies">
@@ -120,6 +136,18 @@ function IndexPopup() {
             isChecked={quickDownloadButton}
             colorScheme="orange"
             onChange={(e) => setQuickDownloadButton(e.target.checked)}
+          />
+        </FormControl>
+        <FormControl display="flex" alignItems="center">
+          <Tooltip label="Adds a new button that skips the 5 second wait and instantly downloads the file (this makes another request on every mod view and might get patched)">
+            <FormLabel htmlFor="email-alerts" mb="0" mr="auto">
+              Super Quick Download
+            </FormLabel>
+          </Tooltip>
+          <Switch
+            isChecked={superQuickDownload}
+            colorScheme="orange"
+            onChange={(e) => setSuperQuickDownload(e.target.checked)}
           />
         </FormControl>
         <FormControl display="flex" alignItems="center">

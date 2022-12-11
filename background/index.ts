@@ -1,18 +1,16 @@
 import windowChanger from "./injected-helper";
 import { Storage } from "@plasmohq/storage";
-let config = undefined;
+let config: Config = undefined;
 
-chrome.runtime.onMessage.addListener(messageReceived);
+chrome.runtime.onMessage.addListener((msg: Config) => config = msg);
 const storage = new Storage();
-function messageReceived(msg) {
-  config = msg;
-}
 const inject = async (tabId: number) => {
   if (!config) {
     config = {
       quickDownloadButton:
         (await storage.get("quickDownloadButton")) != "false",
       autoDownload: (await storage.get("autoDownload")) != "false",
+      superQuickDownload: (await storage.get("superQuickDownload")) != "false",
     };
   }
   chrome.scripting.executeScript(
@@ -20,12 +18,12 @@ const inject = async (tabId: number) => {
       target: {
         tabId,
       },
-      world: "MAIN", // MAIN in order to access the window object
+      world: typeof browser !== "undefined" ? undefined : "MAIN", // MAIN in order to access the window object
       func: windowChanger,
       args: [config],
     },
     () => {
-      console.log("Background script got callback after injection");
+      //callback function
     },
   );
 };
