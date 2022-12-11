@@ -27,5 +27,6 @@ jobs:
       - name: Upload dist folder to github artifacts
         uses: actions/upload-artifact@v2
         with:
+          name: "browser-extensions"
           path: dist/*.zip
           retention-days: 3
