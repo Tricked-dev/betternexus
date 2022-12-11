@@ -3,15 +3,12 @@ import {
   Button,
   Center,
   Link as ChakraLink,
-  ChakraProvider,
-  ColorModeProvider,
   FormControl,
   FormLabel,
   Heading,
   Switch,
   Text,
   Tooltip,
-  extendTheme,
   useColorMode
 } from "@chakra-ui/react"
 import { useEffect } from "react"
@@ -24,15 +21,11 @@ import {
 
 import { useStorage } from "@plasmohq/storage/hook"
 
-const config = {
-  initialColorMode: "dark",
-  useSystemColorMode: false
-}
-
-const theme = extendTheme({ config })
+import { ChakraBase } from "~ui"
 
 function Link({ href, children, ...props }) {
-  const as = href.startsWith("http") ? undefined : WouterLink
+  const as =
+    href.startsWith("http") || props.target == "_blank" ? undefined : WouterLink
   return (
     <ChakraLink href={href} {...props} as={as}>
       {children}
@@ -42,27 +35,25 @@ function Link({ href, children, ...props }) {
 
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <ColorModeProvider>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            minWidth: 300
-          }}>
-          <Router>
-            <RouterSwitch>
-              <Route path="/settings">
-                <Settings />
-              </Route>
-              <Route>
-                <IndexPopup />
-              </Route>
-            </RouterSwitch>
-          </Router>
-        </div>
-      </ColorModeProvider>
-    </ChakraProvider>
+    <ChakraBase>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          minWidth: 300
+        }}>
+        <Router>
+          <RouterSwitch>
+            <Route path="/settings">
+              <Settings />
+            </Route>
+            <Route>
+              <IndexPopup />
+            </Route>
+          </RouterSwitch>
+        </Router>
+      </div>
+    </ChakraBase>
   )
 }
 
@@ -113,6 +104,9 @@ function IndexPopup() {
           <Link href="https://www.nexusmods.com/" target="_blank">
             Open nexus
           </Link>
+          <Link href="/tabs/mass.html" target="_blank">
+            Open Mass Download
+          </Link>
         </Box>
       </Box>
       <Box px="4" pb="4" pt="2">
@@ -124,6 +118,7 @@ function IndexPopup() {
           </Tooltip>
           <Switch
             isChecked={quickDownloadButton}
+            colorScheme="orange"
             onChange={(e) => setQuickDownloadButton(e.target.checked)}
           />
         </FormControl>
@@ -135,6 +130,7 @@ function IndexPopup() {
           </Tooltip>
           <Switch
             isChecked={autoDownload}
+            colorScheme="orange"
             onChange={(e) => setAutoDownload(e.target.checked)}
           />
         </FormControl>
