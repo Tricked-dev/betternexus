@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Heading,
+  Text,
   Textarea,
   TextareaProps,
   useToast
@@ -47,6 +48,16 @@ export default function MassDownloadTab() {
         justifyContent="center"
         gap="2">
         <Heading textAlign={"center"}>Mass Download</Heading>
+        <ul>
+          <Text as="li" fontSize={"sm"}>
+            Enable the Quick Download feature to automatically download the mod
+            after waiting 5 seconds
+          </Text>
+          <Text as="li" fontSize={"sm"}>
+            Enable the Super Quick Download feature to instantly download the
+            mod
+          </Text>
+        </ul>
         <AutoResizeTextarea
           onChange={(e) => setData(e.target.value)}
           value={data}
