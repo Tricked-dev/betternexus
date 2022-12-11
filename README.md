@@ -1,3 +1,5 @@
+# Better Nexus
+
 This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
 
 ## Features
@@ -7,7 +9,9 @@ This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with
 
 ## Screenshots
 
-![image](https://user-images.githubusercontent.com/72335827/206877756-955754c1-9e1a-4c10-b8ab-1630125b999e.png)
+![image](https://user-images.githubusercontent.com/72335827/206900255-ca6e57f1-ca4e-47e0-a60e-034e71e18b17.png)
+![image](https://user-images.githubusercontent.com/72335827/206900262-a221c851-a628-48d3-9438-47f5b21111fe.png)
+
 ![image](https://user-images.githubusercontent.com/72335827/206877762-baa5e49c-a876-442e-9669-0f13563b924a.png)
 
 mass download accepts a bunch of urls and then opens those tabs and starts the download
