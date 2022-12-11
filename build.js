@@ -14,9 +14,13 @@ result.then(async () => {
   } catch (_) {}
   for await (let file of await readdir("./build")) {
     if (!file.endsWith(".zip")) continue;
-    await rename(
-      "./build/" + file,
-      `./dist/${PKG.name}-${PKG.version}-${file.split("-")[0]}.zip`,
-    );
+    try {
+      await rename(
+        "./build/" + file,
+        `./dist/${PKG.name}-${PKG.version}-${file.split("-")[0]}.zip`,
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }
 });
