@@ -6,12 +6,14 @@ import {
   FormControl,
   FormLabel,
   Heading,
+  IconButton,
   Switch,
   Text,
   Tooltip,
   useColorMode
 } from "@chakra-ui/react"
 import { useEffect } from "react"
+import { MdSettings } from "react-icons/md"
 import {
   Route,
   Router,
@@ -80,7 +82,19 @@ function Settings() {
 function Header() {
   return (
     <Box bg="gray.600" px="4" py="4">
-      <Heading fontSize={"3xl"}> Better Nexus</Heading>
+      <Heading fontSize={"3xl"} display="flex" justifyContent={"space-between"}>
+        Better Nexus{" "}
+        <Link href="/settings" display="inline-flex">
+          <IconButton
+            aria-label="settings"
+            size="3xl"
+            width="1em"
+            backgroundColor={"transparent"}
+            icon={
+              <MdSettings height={"1em"} display="inline-flex" />
+            }></IconButton>
+        </Link>
+      </Heading>
       <Text fontSize={"md"} colorScheme="blue">
         Just slightly improve the Nexus experience
       </Text>
@@ -91,7 +105,6 @@ function Header() {
 function NavigationLinks() {
   return (
     <Box as="nav" display="flex" gap="2">
-      <Link href="/settings">Settings</Link>
       <Link href="https://www.nexusmods.com/" target="_blank">
         Open nexus
       </Link>
@@ -102,88 +115,98 @@ function NavigationLinks() {
   )
 }
 
-function IndexPopup() {
-  const [quickDownloadButton, setQuickDownloadButton] = useStorage(
-    "QuickDownloadButton",
-    true
-  )
-  const [autoDownload, setAutoDownload] = useStorage("AutoDownload", true)
-  const [removePremiumBanners, setRemovePremiumBanners] = useStorage(
-    "RemovePremiumBanners",
-    true
-  )
-  const [superQuickDownload, setSuperQuickDownload] = useStorage(
-    "SuperQuickDownload",
-    false
-  )
+function createSetting<
+  K extends string,
+  T extends Record<string, string | boolean | JSX.Element>
+>(
+  key: K,
+  options: T
+): T & {
+  key: K
+  v: any
+  s: (setter: any) => Promise<void>
+} {
+  const [v, s] = useStorage(key, options.default ?? true)
+  return {
+    ...options,
+    key,
+    v,
+    s
+  }
+}
 
-  useEffect(() => {
-    chrome.runtime.sendMessage({
-      quickDownloadButton,
-      autoDownload,
-      superQuickDownload,
-      removePremiumBanners
+function QuickSettings() {
+  const options = [
+    createSetting("quickDownloadButton", {
+      label: "Quick Download Button",
+      tooltip: (
+        <>Adds a button that skips the popup when a mod requires dependencies</>
+      )
+    }),
+    createSetting("autoDownload", {
+      label: "Auto Download",
+      tooltip: (
+        <>
+          Automatically presses the download (slow) button when it comes in
+          screen
+        </>
+      )
+    }),
+    createSetting("removePremiumBanners", {
+      label: "Remove Premium Banners",
+      tooltip: "Removes the premium banners from the mod page"
+    }),
+    createSetting("superQuickDownload", {
+      label: "Super Quick Download",
+      default: false,
+      tooltip: (
+        <>
+          Adds a new button that skips the 5 second wait and instantly downloads
+          the file (this makes another request on every mod view and might get
+          patched)
+        </>
+      )
     })
-  }, [
-    quickDownloadButton,
-    autoDownload,
-    superQuickDownload,
-    removePremiumBanners
-  ])
+  ] as const
 
+  /* check if the options are valid */
+  type Check<T extends Config> = T
+  type cnf = Check<Record<typeof options[number]["key"], boolean>>
+
+  useEffect(
+    () => {
+      chrome.runtime.sendMessage(
+        Object.fromEntries(options.map((o) => [o.key, o.v]))
+      )
+    },
+    options.map((x) => x.v)
+  )
+
+  return (
+    <Box px="4" pb="4" pt="2">
+      {options.map((o) => (
+        <FormControl display="flex" alignItems="center" key={o.key}>
+          <Tooltip label={o.tooltip}>
+            <FormLabel htmlFor="email-alerts" mb="0" mr="auto">
+              {o.label}
+            </FormLabel>
+          </Tooltip>
+          <Switch
+            isChecked={o.v}
+            colorScheme="orange"
+            onChange={(e) => o.s(e.target.checked)}
+          />
+        </FormControl>
+      ))}
+    </Box>
+  )
+}
+
+function IndexPopup() {
   return (
     <>
       <Header />
-      <Box px="4" pb="4" pt="2">
-        <FormControl display="flex" alignItems="center">
-          <Tooltip label="Adds a button that skips the popup when a mod requires dependencies">
-            <FormLabel htmlFor="email-alerts" mb="0" mr="auto">
-              Quick Download Button
-            </FormLabel>
-          </Tooltip>
-          <Switch
-            isChecked={quickDownloadButton}
-            colorScheme="orange"
-            onChange={(e) => setQuickDownloadButton(e.target.checked)}
-          />
-        </FormControl>
-        <FormControl display="flex" alignItems="center">
-          <Tooltip label="Adds a new button that skips the 5 second wait and instantly downloads the file (this makes another request on every mod view and might get patched)">
-            <FormLabel htmlFor="email-alerts" mb="0" mr="auto">
-              Super Quick Download
-            </FormLabel>
-          </Tooltip>
-          <Switch
-            isChecked={superQuickDownload}
-            colorScheme="orange"
-            onChange={(e) => setSuperQuickDownload(e.target.checked)}
-          />
-        </FormControl>
-        <FormControl display="flex" alignItems="center">
-          <Tooltip label="Automatically presses the download (slow) button when it comes in screen">
-            <FormLabel htmlFor="email-alerts" mb="0" mr="auto">
-              Auto Download
-            </FormLabel>
-          </Tooltip>
-          <Switch
-            isChecked={autoDownload}
-            colorScheme="orange"
-            onChange={(e) => setAutoDownload(e.target.checked)}
-          />
-        </FormControl>
-        <FormControl display="flex" alignItems="center">
-          <Tooltip label="Removes the premium banners from the mod page">
-            <FormLabel htmlFor="email-alerts" mb="0" mr="auto">
-              Remove Premium Banners
-            </FormLabel>
-          </Tooltip>
-          <Switch
-            isChecked={removePremiumBanners}
-            colorScheme="orange"
-            onChange={(e) => setRemovePremiumBanners(e.target.checked)}
-          />
-        </FormControl>
-      </Box>
+      <QuickSettings />
     </>
   )
 }
