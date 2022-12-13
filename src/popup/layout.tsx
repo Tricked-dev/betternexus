@@ -1,5 +1,5 @@
 import { Box, useColorModeValue, Text } from "@chakra-ui/react"
-import PKG from "../package.json" assert {type: "json"};
+import PKG from "../../package.json" assert {type: "json"};
 
 export default function Layout({ children, Header = undefined }) {
   const color = useColorModeValue("gray.300", "gray.600")

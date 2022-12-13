@@ -1,6 +1,6 @@
 import { Box, Button, Center, Heading, IconButton, Text } from "@chakra-ui/react"
 import { MdPayment, MdSource } from "react-icons/md";
-import PKG from "../package.json" assert {type: "json"};
+import PKG from "../../package.json" assert {type: "json"};
 import Link from "./link";
 
 export default function About() {
