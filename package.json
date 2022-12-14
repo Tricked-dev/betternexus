@@ -50,7 +50,7 @@
     ],
     "browser_specific_settings": {
       "gecko": {
-        "id": "betternexus@tricked.dev",
+        "id": "better.nexus@tricked.dev",
         "strict_min_version": "80.0"
       }
     }
