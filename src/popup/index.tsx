@@ -8,8 +8,7 @@ import {
   IconButton,
   Switch,
   Text,
-  useColorMode,
-  useColorModeValue
+  useColorMode
 } from "@chakra-ui/react"
 import { MdSettings } from "react-icons/md"
 import { Route, Router, Switch as RouterSwitch } from "wouter"

@@ -1,4 +1,4 @@
-import { concurrently } from "concurrently";
+import { execSync } from "child_process";
 import { mkdir, readdir, readFile, rename } from "fs/promises";
 
 console.log("Reading package.json...");
@@ -6,8 +6,9 @@ const { name, version } = JSON.parse(await readFile("./package.json", "utf-8"));
 
 console.log("Building...");
 // run all build script for browsers
-const { result } = concurrently(["pnpm:build:*"]);
-await result;
+execSync("pnpm build", {
+  stdio: "inherit",
+});
 
 console.log("Done building");
 // create dist folder if it doesn't exist already
