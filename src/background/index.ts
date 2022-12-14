@@ -13,6 +13,7 @@ const inject = async (tabId: number) => {
       superQuickDownload: (await storage.get("SuperQuickDownload")) != "false",
       removePremiumBanners:
         (await storage.get("RemovePremiumBanners")) != "false",
+      listDownloadButton: (await storage.get("ListDownloadButton")) != "false",
     };
   }
   chrome.scripting.executeScript(
@@ -34,6 +35,6 @@ const inject = async (tabId: number) => {
 // You can inject however you'd like to, doesn't have
 // to be with chrome.tabs.onActivated
 chrome.tabs.onUpdated.addListener((e, changeInfo, tab) => {
-  if (!tab.url.includes("https://www.nexusmods.com/")) return;
+  if (!tab?.url?.includes("https://www.nexusmods.com/")) return;
   inject(e);
 });

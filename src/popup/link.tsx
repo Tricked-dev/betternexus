@@ -1,13 +1,5 @@
-import {
-  Link as ChakraLink,
-} from "@chakra-ui/react"
-import { useEffect } from "react"
-import { MdSettings } from "react-icons/md"
-import {
-  Link as WouterLink
-} from "wouter"
-
-
+import { Link as ChakraLink } from "@chakra-ui/react"
+import { Link as WouterLink } from "wouter"
 
 export default function Link({ href, children, ...props }) {
   const as =

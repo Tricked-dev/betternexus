@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   FormControl,
   FormLabel,
   IconButton,
@@ -9,10 +8,8 @@ import {
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  PopoverHeader,
   PopoverTrigger,
-  Switch,
-  Tooltip
+  Switch
 } from "@chakra-ui/react"
 import { useEffect } from "react"
 import { MdHelp } from "react-icons/md"
@@ -70,6 +67,11 @@ export default function QuickSettings() {
           patched)
         </>
       )
+    }),
+    createSetting("listDownloadButton", {
+      label: "List download button",
+      default: false,
+      tooltip: <>Adds a download button to the mod list page.</>
     })
   ] as const
 
