@@ -66,7 +66,7 @@ const windowChanger = (config: Config) => {
     let search = new URL(path).searchParams;
     let file = search.get("id") ?? search.get("file_id");
     let manualParentBase = document.getElementById("action-manual");
-  
+
     let manualParent = manualParentBase.cloneNode(true) as HTMLElement;
 
     let text = manualParent
@@ -119,13 +119,27 @@ const windowChanger = (config: Config) => {
       element.classList.add("inline-flex");
       element.appendChild(btn);
       elem.children[0].appendChild(element);
-      let modId = mod.children[1].attributes["data-mod-id"].value;
+      let link = mod.getElementsByClassName("tile-name")[0].children[0].attributes["href"]
       btn.onclick = async () => {
         try {
-          let dl = await getInstantDownloadUrl(modId, window.current_game_id);
-          let downloadAnchor = document.createElement("a");
-          downloadAnchor.href = dl;
-          downloadAnchor.click();
+          let text = await fetch(link.value).then(r => r.text());
+          const regex = /(https:\/\/www\.nexusmods\.com\/subnautica\/mods\/(\d+)\?tab=files&file_id=(\d+)|\/Core\/Libs\/Common\/Widgets\/ModRequirementsPopUp\?id=(\d+)&game_id=(\d+))/g;
+          const match = regex.exec(text);
+
+          if (match) {
+            let url = match[0];
+            if (!url.startsWith("https://")) {
+              url = "https://www.nexusmods.com" + url;
+            }
+            let search = new URL(url).searchParams;
+            let modId = search.get("id") || search.get("file_id");
+            let dl = await getInstantDownloadUrl(modId, window.current_game_id);
+            let downloadAnchor = document.createElement("a");
+            downloadAnchor.href = dl;
+            downloadAnchor.click();
+          } else {
+            alert("I could not find the download link.");
+          }
         } catch (e) {
           alert(e);
         }
