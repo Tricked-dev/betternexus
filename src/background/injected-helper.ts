@@ -8,7 +8,11 @@ const windowChanger = (config: Config) => {
 
     const text =
       manualParent?.getElementsByClassName("btn inline-flex popup-btn-ajax")[0];
-    if (!text) return;
+    if (!text) {
+      const dl = manualParent?.getElementsByClassName("btn inline-flex")[0];
+      path = dl?.attributes["href"].value;
+      return
+    };
 
     manualParentBase.parentNode.appendChild(manualParent);
     manualParent.id = "better-nexus-active";
@@ -39,7 +43,7 @@ const windowChanger = (config: Config) => {
       }
     }, 200);
   };
-  const getInstantDownloadUrl = async (file: string, gameId: string) => {
+  const getInstantDownloadUrl = async (file: string, gameId: string): Promise<string> => {
     let url = await fetch(
       "https://www.nexusmods.com/Core/Libs/Common/Managers/Downloads?GenerateDownloadUrl",
       {
@@ -58,20 +62,26 @@ const windowChanger = (config: Config) => {
     return url;
   };
   const addInstantDownload = async () => {
-    if (!path) return;
+    if (!path || document.getElementById("better-nexus-instant-download")) return;
     let search = new URL(path).searchParams;
     let file = search.get("id") ?? search.get("file_id");
     let manualParentBase = document.getElementById("action-manual");
-    let url = await getInstantDownloadUrl(file, window.current_game_id);
-    if (!url) return;
+  
     let manualParent = manualParentBase.cloneNode(true) as HTMLElement;
 
-    manualParent.children[0].attributes["href"].value = url;
     let text = manualParent
-      ?.getElementsByClassName("btn inline-flex popup-btn-ajax")[0];
-    text.getElementsByClassName("flex-label")[0].innerHTML = "Instant Download";
+      ?.getElementsByClassName("btn inline-flex")[0];
 
+    text.getElementsByClassName("flex-label")[0].innerHTML = "Instant Download";
+    text.id = "better-nexus-instant-download"
     manualParentBase.parentNode.appendChild(manualParent);
+
+    let url = await getInstantDownloadUrl(file, window.current_game_id);
+    if (!url) {
+      text.classList.add("disabled");
+      return;
+    };
+    manualParent.children[0].attributes["href"].value = url;
 
     if (
       window.location.search.includes("fast=true")
