@@ -1,6 +1,6 @@
 # Better Nexus
 
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+<img src="./assets/icon.svg" height="50">
 
 ## Features
 
