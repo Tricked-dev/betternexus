@@ -1,4 +1,4 @@
-name: "Submit to Web Store"
+name: "Build and upload artifacts"
 on: [push]
 
 jobs:

@@ -1,7 +1,7 @@
 {
   "name": "betternexus",
   "displayName": "BetterNexus",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Improve the Nexus mods website with a quick download button and automatic downloads.",
   "author": "Tricked-dev <tricked@tricked.pro>",
   "type": "module",
