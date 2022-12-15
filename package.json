@@ -44,6 +44,7 @@
     "host_permissions": [
       "https://www.nexusmods.com/*"
     ],
+    "default_locale": "en",
     "permissions": [
       "scripting",
       "activeTab"
