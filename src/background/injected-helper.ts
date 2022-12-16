@@ -110,8 +110,9 @@ const windowChanger = (config: Config) => {
     );
     for (let mod of mods) {
       let btn = document.createElement("button");
-      btn.innerHTML = "QuickDL";
-      btn.classList.add("inline-flex");
+      btn.innerText = "Download";
+      btn.classList.add("inline-flex", "btnsmall", "btn");
+      btn.style.marginLeft = "auto";
       let elem = mod.getElementsByClassName("tile-data")[0];
       if (elem.attributes["better-nexus-active"]) continue;
       elem.attributes["better-nexus-active"] = "true";
