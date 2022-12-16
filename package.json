@@ -1,7 +1,7 @@
 {
   "name": "betternexus",
   "displayName": "BetterNexus",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Improve the Nexus mods website with a quick download button and automatic downloads.",
   "author": "Tricked-dev <tricked@tricked.pro>",
   "type": "module",
@@ -20,7 +20,7 @@
     "@gatsbyjs/reach-router": "^2.0.0",
     "@plasmohq/storage": "^0.13.0",
     "framer-motion": "^7.6.19",
-    "plasmo": "0.59.3",
+    "plasmo": "0.60.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
