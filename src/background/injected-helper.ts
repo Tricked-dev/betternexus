@@ -147,7 +147,7 @@ const windowChanger = (config: Config) => {
         try {
           let text = await fetch(link.value).then((r) => r.text())
           const regex =
-            /(https:\/\/www\.nexusmods\.com\/subnautica\/mods\/(\d+)\?tab=files&file_id=(\d+)|\/Core\/Libs\/Common\/Widgets\/ModRequirementsPopUp\?id=(\d+)&game_id=(\d+))/g
+            /https:\/\/(www\.)?nexusmods\.com\/\w+\/mods\/(\d+)\?tab=files&file_id=(\d+)/g
           const match = regex.exec(text)
 
           if (match) {
@@ -188,18 +188,31 @@ const windowChanger = (config: Config) => {
       window.location.href = path
     }
   }
-  function removeAllPremiumBanners() {
-    let elemns = document.querySelectorAll("section .premium-block")
-    for (let elem of elemns) {
-      elem.classList.add("hidden")
-      elem.remove()
-    }
-  }
+
   if (config.removePremiumBanners) {
-    setTimeout(() => {
-      removeAllPremiumBanners()
-    }, 200)
-    removeAllPremiumBanners()
+    //https://stackoverflow.com/questions/5525071/how-to-wait-until-an-element-exists
+    let observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (!mutation.addedNodes) return
+
+        for (let i = 0; i < mutation.addedNodes.length; i++) {
+          // do things to your newly added nodes here
+          let node = mutation.addedNodes[i] as HTMLElement
+          if (!node.classList.contains(".premium-block")) {
+            continue
+          }
+          node.classList.add("hidden")
+          node.remove()
+        }
+      })
+    })
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: false,
+      characterData: false
+    })
   }
 }
 
