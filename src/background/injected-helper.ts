@@ -191,20 +191,44 @@ const windowChanger = (config: Config) => {
 
   if (config.removePremiumBanners) {
     //https://stackoverflow.com/questions/5525071/how-to-wait-until-an-element-exists
+    let scanRemove = (list: NodeList) => {
+      for (let i = 0; i < list.length; i++) {
+        let node = list[i] as HTMLElement
+        if (!node?.classList?.contains("premium-block")) {
+          continue
+        }
+        node.classList.add("hidden")
+        node.remove()
+      }
+    }
     let observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (!mutation.addedNodes) return
-
-        for (let i = 0; i < mutation.addedNodes.length; i++) {
-          // do things to your newly added nodes here
-          let node = mutation.addedNodes[i] as HTMLElement
-          if (!node.classList.contains(".premium-block")) {
-            continue
+        scanRemove(mutation.addedNodes)
+        document.querySelectorAll("div .clearfix").forEach((x) => {
+          if (
+            x.firstElementChild.nodeName !== "SCRIPT" ||
+            !x.firstElementChild.innerHTML.includes("areAdsBlocked")
+          ) {
+            return
           }
-          node.classList.add("hidden")
-          node.remove()
-        }
+          x.classList.add("hidden")
+          x.remove()
+        })
       })
+    })
+
+    scanRemove(document.querySelectorAll("section .premium-block"))
+
+    document.querySelectorAll("div .clearfix").forEach((x) => {
+      if (
+        x.firstElementChild.nodeName !== "SCRIPT" ||
+        !x.firstElementChild.innerHTML.includes("areAdsBlocked")
+      ) {
+        return
+      }
+      x.classList.add("hidden")
+      x.remove()
     })
 
     observer.observe(document.body, {
