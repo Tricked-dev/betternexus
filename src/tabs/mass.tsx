@@ -4,7 +4,7 @@ import {
   Heading,
   Text,
   Textarea,
-  TextareaProps,
+  type TextareaProps,
   useToast
 } from "@chakra-ui/react"
 import { forwardRef, useState } from "react"

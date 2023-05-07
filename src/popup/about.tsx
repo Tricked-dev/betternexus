@@ -1,5 +1,6 @@
 import { Box, Button, Center, Heading, IconButton, Text } from "@chakra-ui/react"
-import { MdPayment, MdSource } from "react-icons/md";
+import  {FaGithub} from "@react-icons/all-files/fa/FaGithub";
+import {MdPayment} from "@react-icons/all-files/md/MdPayment";
 import PKG from "../../package.json" assert {type: "json"};
 import Link from "./link";
 
@@ -18,7 +19,7 @@ export default function About() {
                             <IconButton icon={<MdPayment />} aria-label={"Sponsor Developer"} />
                         </a>
                         <a href="https://github.com/tricked-dev/betternexus" target="_blank">
-                            <IconButton icon={<MdSource />} aria-label={"Source"} />
+                            <IconButton icon={<FaGithub />} aria-label={"Source"} />
                         </a>
                     </Box>
                 </Text>

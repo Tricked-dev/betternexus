@@ -11,8 +11,8 @@ import {
   PopoverTrigger,
   Switch
 } from "@chakra-ui/react"
+import { IoMdHelp } from "@react-icons/all-files/io/IoMdHelp"
 import { useEffect } from "react"
-import { MdHelp } from "react-icons/md"
 
 import { useStorage } from "@plasmohq/storage/hook"
 
@@ -77,7 +77,7 @@ export default function QuickSettings() {
 
   /* check if the options are valid */
   type Check<T extends Config> = T
-  type cnf = Check<Record<typeof options[number]["key"], boolean>>
+  type cnf = Check<Record<(typeof options)[number]["key"], boolean>>
 
   useEffect(
     () => {
@@ -99,7 +99,7 @@ export default function QuickSettings() {
                   mr="0.5em"
                   bg="transparent"
                   size="1em"
-                  icon={<MdHelp />}
+                  icon={<IoMdHelp />}
                   aria-label={""}
                 />
               </PopoverTrigger>

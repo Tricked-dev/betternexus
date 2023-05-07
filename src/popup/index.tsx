@@ -10,7 +10,7 @@ import {
   Text,
   useColorMode
 } from "@chakra-ui/react"
-import { MdSettings } from "react-icons/md"
+import { MdSettings } from "@react-icons/all-files/md/MdSettings"
 import { Route, Router, Switch as RouterSwitch } from "wouter"
 
 import { ChakraBase } from "~ui"
