@@ -24,9 +24,14 @@ jobs:
           cache: "pnpm"
       - name: Build and zip extension artifact
         run: node build.js
+      - name: 'Create pem file'
+        run: |
+          echo "${{ secrets.EXTENSION_PEM }}" > better_nexus.pem
+      - name: "Pack extension as crx"
+        run: bash scripts/crx.sh dist/x/* better_nexus.pem
       - name: Upload dist folder to github artifacts
         uses: actions/upload-artifact@v2
         with:
           name: "browser-extensions"
-          path: dist/*.zip
+          path: dist/*
           retention-days: 3
