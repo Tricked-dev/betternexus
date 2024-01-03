@@ -52,6 +52,11 @@ const windowChanger = (config: Config) => {
   }
 
   const addAutoDownload = () => {
+    if(globalThis.autoDownload) {
+      return
+    } else {
+      globalThis.autoDownload = true
+    }
     const interval = setInterval(() => {
       const dl = document.getElementById("slowDownloadButton")
 

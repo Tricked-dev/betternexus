@@ -14,28 +14,28 @@
     "build": "concurrently -n w: pnpm:build:*"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.6.1",
-    "@emotion/react": "^11.11.0",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@gatsbyjs/reach-router": "^2.0.1",
-    "@plasmohq/storage": "^1.5.0",
+    "@plasmohq/storage": "^1.9.0",
     "@react-icons/all-files": "^4.1.0",
-    "framer-motion": "^10.12.8",
-    "plasmo": "0.70.1",
+    "framer-motion": "^10.17.4",
+    "plasmo": "0.84.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-textarea-autosize": "^8.4.1",
-    "wouter": "^2.10.1"
+    "react-textarea-autosize": "^8.5.3",
+    "wouter": "^2.12.1"
   },
   "devDependencies": {
-    "@plasmohq/prettier-plugin-sort-imports": "3.6.4",
-    "@types/chrome": "0.0.235",
-    "@types/node": "20.1.0",
-    "@types/react": "18.2.5",
-    "@types/react-dom": "18.2.4",
-    "concurrently": "^8.0.1",
-    "prettier": "2.8.8",
-    "typescript": "5.0.4"
+    "@plasmohq/prettier-plugin-sort-imports": "4.0.1",
+    "@types/chrome": "0.0.254",
+    "@types/node": "20.10.6",
+    "@types/react": "18.2.46",
+    "@types/react-dom": "18.2.18",
+    "concurrently": "^8.2.2",
+    "prettier": "3.1.1",
+    "typescript": "5.3.3"
   },
   "manifest": {
     "host_permissions": [
